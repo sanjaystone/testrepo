@@ -1,0 +1,132 @@
+---
+title: "MSDS 6306_Live Session Assignment Unit 05"
+author: "Sanjay Kalluvilayil"
+date: "June 15, 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+Assignment:
+The assignment is to take the live session unit 04 assignment questions 01-04 and put it into R Markdown. I have used RStudio for the markdown document. 
+
+Directionos
+Formatting can be basic just needs to be legible and it needs to knit to an HTML document. Post the HTML document under Assignments and Grading : Live Session Assignment Unit 05
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+## Calculation Questions (using R); Use R to calculate the following:
+   1. Basic Math 
+   a. The log of a positive number.
+```{r }
+log(10);
+log(100);
+```
+### b. What is the default base for the log function? 
+    -> The default base is the natural logarithm , e. e= 2.171828
+
+### Calculate the log of your previous number with a different base.
+```{r }
+log10(10);
+log2(10);
+```
+### c. The log of a negative number. (explain the answer)
+```{r }
+log(-10);
+```
+--> NaN means 'Not a Number', you can not take the log of a negative number.  It must be a positive number.
+
+### d. The square-root of a positive number.
+```{R }
+sqrt(16);
+```
+### 2. Random number generation.
+    a. Create a vector of 15 standard normal random variables. Calculate its mean and SD.
+```{R }
+x <- rnorm (15);
+x;
+mean(x)
+sd(x);
+```
+### b. Change the mean to 10 and the SD to 2 and recalculate the vector of 15 random normal variables. Calculate its mean and SD.
+```{R }
+x <- rnorm (15, mean=10, sd=2);
+x;
+mean(x)
+sd(x);
+```
+###c. Why are the means and SD not exactly the same as the means and SDs specified in the function?
+
+--> The rnorm takes 15 samples out of a normal population with  mean of 10 and SD of 2.  The 15 samples will have
+    their own mean and SD.  According to Central Limit Theorem, as sample size approaches >30, it will more closely
+    approximate the normal distribution for mean of 10 and SD of 2.
+
+### 3. Vector Operations
+    a. The weights of 6 individuals in kg are 60, 72, 57, 90, 95, 72.
+    b. Their heights (in m) are 1.80, 1.85, 1.72, 1.90, 1.74, 1.91.
+    c. Enter these vectors into R.
+```{R }
+weight <- c(60, 72, 57, 90, 95, 72)
+height <- c(1.80, 1.85, 1.72, 1.90, 1.74, 1.91)
+weight
+height
+```
+### d. Create a scatterplot of weight vs. height. Interpret the scatterplot.
+
+```{R }
+plot(weight, height, main= "Weight vs. Height Conpanson", xlab="Weight", ylab= "Height", col="blue");
+plot(height, weight, main= "Height vs. Weight Conpanson", xlab="height", ylab= "weight", col="blue");
+
+```
+### Interpretation
+--> When we plot weight vs. Height, as weight increases so does height, except for one outlier in the bottom right corner. When we plot Height v. Weight, it shows in general as height increases, so doe weight. There is one outlier up in the left corner.
+
+### e. Calculate the BMI for each individual. (BMI = weight in kg divided by the square of the height in m)
+```{R }
+bmi <- weight/ height**2
+bmi
+```
+### f. Calculate the mean for weight.
+```{R }
+mean(weight)
+```
+
+### g. Subtract the mean from each value of weight.
+```{R }
+mean <- mean(weight)
+mean
+diff <- weight -mean
+diff
+```
+
+### h. Sum the result. Now you know why we square the deviations from the mean to calculate a standard deviation!
+--> It is an extremely small number, which is not an adequate measure of the spread or variance.  We square the deviations to eliminate the negative numbers.
+```{R }
+sum(diff)
+```
+
+### 4. Your data science profile. 
+Enter your data science profile into R as a data frame with
+two columns. Call it by your first name. The categories are computer programming,
+math, statistics, machine learning, domain expertise, communication and presentation
+skills, and data visualization. Your ranking for each category 1 5, with 5 as best. Create
+a bar graph of your data science profile. When you submit your work, please submit your
+code, including the data entry piece.
+```{R }
+categories <-c("computer programming", "math","statistics", "machine learning", "domain expertise", "communication and presentation skills", "data visualization")
+ranking <- c(2,3,2,1,5,4,4)
+sanjay <- data.frame(categories, ranking)
+sanjay
+library(ggplot2)
+ggplot(data=sanjay, aes(x = categories, y = ranking))+ geom_bar(stat='identity')
+```
+
+
+
+
